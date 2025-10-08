@@ -1,0 +1,84 @@
+
+
+.custom-bg {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+.custom-card {
+    max-width: 480px;
+    border-radius: 12px;
+    border: none;
+    background: #fff;
+}
+
+
+.custom-icon-circle {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: #007bff;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+
+
+.custom-title {
+    color: #333;
+}
+
+
+.form-control, 
+.form-select {
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    transition: all 0.2s ease-in-out;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 6px rgba(0,123,255,0.3);
+}
+
+
+.custom-label {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.custom-btn {
+    background: #155029;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+    color: #fff;
+}
+
+.custom-btn:hover {
+    background: #0056b3;
+}
+
+
+.custom-addon {
+    background: #f1f1f1;
+    border: none;
+}
+
+.custom-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.custom-link:hover {
+    text-decoration: underline;
+}

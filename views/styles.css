@@ -1,0 +1,28 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.hero {
+    background: url("../../img/hotel.jpg") no-repeat center center;
+    background-size: cover;   
+    min-height: 90vh;         
+    align-items: center;
+    justify-content: center;
+    padding: 50px 20px;
+}
+
+.hero-img {
+    width: 10%;
+    height: 350px;   
+    object-fit: cover;
+    border-radius: 10px;
+}
+.btn-custom {
+  border-radius: 25px;
+  padding: 10px 20px;
+}
+
+.section-title {
+  margin: 50px 0 20px;
+  text-align: center;
+}

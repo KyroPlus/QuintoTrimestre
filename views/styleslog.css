@@ -1,0 +1,22 @@
+
+
+.custom-bg {
+    background-color: #f8f9fa;
+}
+
+
+.custom-card {
+    border-radius: 10px;
+    background: #fff;
+}
+
+
+.form-control {
+    border-radius: 8px;
+}
+
+
+.btn-success {
+    border-radius: 8px;
+    font-weight: 600;
+}
