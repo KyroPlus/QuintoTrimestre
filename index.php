@@ -22,6 +22,9 @@ if(isset($_GET['action'])){
     else if ($_GET['action'] == 'logearUser') {
         $controllerBase->logearUser($_POST);
     }
+    else if($_GET['action'] == "logoutUser"){
+        $controllerBase->logoutUser();
+    }
 }
 else{
     

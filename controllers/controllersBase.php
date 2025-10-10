@@ -24,12 +24,17 @@
                 exit;
             }
 
+
+            $data['contrasena'] = password_hash($data['contrasena'], PASSWORD_DEFAULT);
+
+
             // registrar usuario
-            $pass = password_hash($data['contrasena'], PASSWORD_DEFAULT);
-            $data['contrasena'] = $pass;
+
 
             $registroUsuario = $user->registrarUsuario($data);
             if($registroUsuario > 0){
+                $pass = password_hash($data['contrasena'], PASSWORD_DEFAULT);
+                $data['contrasena'] = $pass;
                 $_SESSION['success'] = "usuario creado exitosamente!";
                 header('Location: '.SITE_URL.'index.php?action=getFormLogearUser');
             }
@@ -82,7 +87,6 @@
 
         public function logearUser($data){
             
-            unset($_SESSION['errores']);
             if (empty($data['email']) || empty($data['contrasena'])) {
                 $_SESSION['errores'] = ['login' => "Ambos campos son obligatorios"];
                 header('Location: '.SITE_URL.'index.php?action=getFormLogearUser');
@@ -93,9 +97,12 @@
             $usuarioExiste2 = $user->logearUsuario($data['email']);
             if($usuarioExiste2){
                 if (password_verify($data['contrasena'], $usuarioExiste2["password"])) {
-                    $_SESSION['correo'] = $usuario["email"];
-                    $_SESSION['nombre'] = $usuario["name"];
-                    $_SESSION['id'] = $usuario["id"];
+                    unset($_SESSION['errores']);
+                    unset($_SESSION['succes']);
+                    $_SESSION['correo'] = $usuarioExiste2["email"];
+                    $_SESSION['nombre'] = $usuarioExiste2["name"];
+                    $_SESSION['id'] = $usuarioExiste2["id"];
+
                     header('Location: ' . SITE_URL . 'index.php');
                     exit;
                 
@@ -113,6 +120,18 @@
             }
 
         }
+
+        public function logoutUser(){
+            session_unset();
+            session_destroy();
+            header('Location: ' . SITE_URL . 'index.php');
+            exit;
+
+
+
+
+        }
+
         
     }
 
