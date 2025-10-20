@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css">
 </head>
+
 <body>
 
   <?php include_once 'views/html/header.php'; ?>
@@ -19,32 +21,59 @@
 
 
   <section class="container text-center my-5">
-        <h1 class="display-4 fw-bold">¡Bienvenido a Hotel Pava!</h1>
-        <p class="lead mt-3">
-            Descubre la comodidad y elegancia que ofrecemos en cada una de nuestras habitaciones.  
-            Vive una experiencia única con servicios de primera calidad pensados para ti.
-        </p>
-      
-        <?php if (!isset($_SESSION['correo'])): ?>
-          <div class="d-flex justify-content-center gap-3 mt-4">
-              <a href="<?= SITE_URL ?>index.php?action=getFormLogearUser" class="btn btn-success btn-lg">Ingresar</a>
-              <a href="<?= SITE_URL ?>index.php?action=getFormRegisterUser" class="btn btn-outline-primary btn-lg">Registrarse</a>
-          </div>
-        <?php else: ?>
-            <div class="d-grid gap-2 col-6 mx-auto mt-4">
-                <a  href="<?= SITE_URL ?>index.php?action=getFormReservas" class="btn btn-warning btn-lg shadow">
-                    <i  class="bi bi-calendar-check"></i> Reservar Ahora
-                </a>
-            </div>
-            <div class="container my-5">
-            <pre>
-              <?php print_r($_SESSION); ?>
-            </pre>
-            <?php
-              $reservas = $_SESSION['reservas_usuario'] ?? ['Hola'];
-            ?>
-            
+    <h1 class="display-4 fw-bold">¡Bienvenido a Hotel Pava!</h1>
+    <p class="lead mt-3">
+      Descubre la comodidad y elegancia que ofrecemos en cada una de nuestras habitaciones.
+      Vive una experiencia única con servicios de primera calidad pensados para ti.
+    </p>
+
+    <?php if (!isset($_SESSION['correo'])): ?>
+      <div class="d-flex justify-content-center gap-3 mt-4">
+        <a href="<?= SITE_URL ?>index.php?action=getFormLogearUser" class="btn btn-success btn-lg">Ingresar</a>
+        <a href="<?= SITE_URL ?>index.php?action=getFormRegisterUser"
+          class="btn btn-outline-primary btn-lg">Registrarse</a>
+      </div>
+    <?php else: ?>
+      <div class="d-grid gap-2 col-6 mx-auto mt-4">
+        <a href="<?= SITE_URL ?>index.php?action=getFormReservas" class="btn btn-warning btn-lg shadow">
+          <i class="bi bi-calendar-check"></i> Reservar Ahora
+        </a>
+      </div>
+      <div class="container my-5">
+        <?php $reservas = $_SESSION['reservas_usuario'] ?? []; ?>
+        <?php if (!empty($reservas)): ?>
+          <h3 class="mb-3">Mis reservas</h3>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Entrada</th>
+                  <th>Salida</th>
+                  <th>Solicitud especial</th>
+                  <th>Estado</th>
+                  <th>Tipo de habitación</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php foreach ($reservas as $res): ?>
+                  <tr>
+                    <td><?= htmlspecialchars($res['id']) ?></td>
+                    <td><?= htmlspecialchars($res['checkin']) ?></td>
+                    <td><?= htmlspecialchars($res['checkout']) ?></td>
+                    <td><?= htmlspecialchars($res['special_request']) ?></td>
+                    <td><?= htmlspecialchars($res['estado'] ?? '') ?></td>
+                    <td><?= htmlspecialchars($res['tipo_habitacion'] ?? '') ?></td>
+                  </tr>
+                <?php endforeach; ?>
+              </tbody>
+            </table>
+          </div>
+        <?php else: ?>
+          <div class="alert alert-info">Aún no tienes reservas.</div>
         <?php endif; ?>
+
+      <?php endif; ?>
 
 
   </section>
@@ -140,4 +169,5 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

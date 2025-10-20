@@ -1,6 +1,8 @@
 <?php
-class Reserva {
-    public function registrarReserva($data) {
+class Reserva
+{
+    public function registrarReserva($data)
+    {
         $conexion = new Conexion();
         $conexion->conectar();
 
@@ -19,23 +21,31 @@ class Reserva {
         )";
 
         $conexion->query($query);
-        $resp = $conexion->getFilasAfectadas();        
+        $resp = $conexion->getFilasAfectadas();
         $conexion->desconectar();
-        return $resp; 
+        return $resp;
     }
 
-    public function obtenerReservas($userId) {
+    public function obtenerReservas($userId)
+    {
         $conexion = new Conexion();
         $conexion->conectar();
 
-        $query = "SELECT r.id, r.checkin, r.checkout, r.special_request, s.name AS estado, tr.name AS tipo_habitacion
-                FROM reservations r
-                INNER JOIN status_reservations s ON r.status_id = s.id
-                INNER JOIN rooms ro ON r.room_id = ro.id
-                INNER JOIN type_rooms tr ON ro.type_id = tr.id
-                WHERE r.user_id = $userId";
+        $query = "SELECT 
+                r.id, 
+                r.checkin, 
+                r.checkout, 
+                r.special_request, 
+                s.name AS estado, 
+                tr.name AS tipo_habitacion
+            FROM reservations r
+            LEFT JOIN status_reservations s ON r.status_id = s.id
+            LEFT JOIN rooms ro ON r.room_id = ro.id
+            LEFT JOIN type_rooms tr ON ro.type_id = tr.id
+            WHERE r.user_id = $userId";
 
-        $result = $conexion->query($query);
+        $conexion->query($query);
+        $result = $conexion->getResult();
 
         $reservas = [];
         if ($result) {
@@ -43,7 +53,7 @@ class Reserva {
                 $reservas[] = $row;
             }
         }
-        print_r($reservas);
+
         $conexion->desconectar();
         return $reservas;
     }
