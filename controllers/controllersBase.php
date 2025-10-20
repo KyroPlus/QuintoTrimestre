@@ -33,8 +33,6 @@
 
             $registroUsuario = $user->registrarUsuario($data);
             if($registroUsuario > 0){
-                $pass = password_hash($data['contrasena'], PASSWORD_DEFAULT);
-                $data['contrasena'] = $pass;
                 $_SESSION['success'] = "usuario creado exitosamente!";
                 header('Location: '.SITE_URL.'index.php?action=getFormLogearUser');
             }

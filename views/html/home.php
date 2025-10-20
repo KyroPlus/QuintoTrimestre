@@ -14,18 +14,42 @@
 
 
 
+
+
+
+
   <section class="container text-center my-5">
         <h1 class="display-4 fw-bold">¡Bienvenido a Hotel Pava!</h1>
         <p class="lead mt-3">
             Descubre la comodidad y elegancia que ofrecemos en cada una de nuestras habitaciones.  
             Vive una experiencia única con servicios de primera calidad pensados para ti.
         </p>
+      
+        <?php if (!isset($_SESSION['correo'])): ?>
+          <div class="d-flex justify-content-center gap-3 mt-4">
+              <a href="<?= SITE_URL ?>index.php?action=getFormLogearUser" class="btn btn-success btn-lg">Ingresar</a>
+              <a href="<?= SITE_URL ?>index.php?action=getFormRegisterUser" class="btn btn-outline-primary btn-lg">Registrarse</a>
+          </div>
+        <?php else: ?>
+            <div class="d-grid gap-2 col-6 mx-auto mt-4">
+                <a  href="<?= SITE_URL ?>index.php?action=getFormReservas" class="btn btn-warning btn-lg shadow">
+                    <i  class="bi bi-calendar-check"></i> Reservar Ahora
+                </a>
+            </div>
+            <div class="container my-5">
+            <pre>
+              <?php print_r($_SESSION); ?>
+            </pre>
+            <?php
+              $reservas = $_SESSION['reservas_usuario'] ?? ['Hola'];
+            ?>
+            
+        <?php endif; ?>
 
-        <div class="d-flex justify-content-center gap-3 mt-4">
-            <a href="<?= SITE_URL ?>index.php?action=getFormLogearUser" class="btn btn-success btn-lg">Ingresar</a>
-            <a href="<?= SITE_URL ?>index.php?action=getFormRegisterUser" class="btn btn-outline-primary btn-lg">Registrarse</a>
-        </div>
+
   </section>
+
+
 
 
 
