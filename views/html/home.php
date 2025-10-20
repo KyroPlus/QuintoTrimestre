@@ -64,6 +64,21 @@
                     <td><?= htmlspecialchars($res['special_request']) ?></td>
                     <td><?= htmlspecialchars($res['estado'] ?? '') ?></td>
                     <td><?= htmlspecialchars($res['tipo_habitacion'] ?? '') ?></td>
+                    <td>
+                      <div class="d-flex justify-content-center gap-2">
+                        <a href="index.php?action=editarReserva&id=<?= $res['id'] ?>" 
+                          class="btn btn-sm btn-primary">
+                          <i class="bi bi-pencil-square"></i> Editar
+                        </a>
+
+                        <form action="<?= SITE_URL ?>index.php?action=eliminarReserva" method="POST">
+                          <input type="hidden" name="id" value="<?= htmlspecialchars($res['id']) ?>">
+                          <button type="submit" class="btn btn-sm btn-danger">
+                            <i class="bi bi-trash"></i> Eliminar
+                          </button>
+                        </form>
+                      </div>
+                  </td>
                   </tr>
                 <?php endforeach; ?>
               </tbody>

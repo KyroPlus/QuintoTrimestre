@@ -57,5 +57,53 @@ class Reserva
         $conexion->desconectar();
         return $reservas;
     }
+
+    public function obtenerReservaPorId($id)
+    {
+        $conexion = new Conexion();
+        $conexion->conectar();
+
+        $query = "SELECT * FROM reservations WHERE id = $id";
+        $conexion->query($query);
+        $result = $conexion->getResult();
+
+        $reserva = $result ? $result->fetch_assoc() : null;
+        $conexion->desconectar();
+        return $reserva;
+    }
+
+    public function actualizarReserva($data)
+    {
+        $conexion = new Conexion();
+        $conexion->conectar();
+
+        $query = "UPDATE reservations SET 
+                    checkin = '$data[checkin]',
+                    checkout = '$data[checkout]',
+                    special_request = '$data[special_request]',
+                    status_id = '$data[estado_id]'
+                  WHERE id = $data[id]";
+
+        $conexion->query($query);
+        $resp = $conexion->getFilasAfectadas();
+        $conexion->desconectar();
+        return $resp;
+    }
+
+    public function eliminarReserva($id)
+    {
+        $conexion = new Conexion();
+        $conexion->conectar();
+
+        $query = "UPDATE reservations SET status_id = 3 WHERE id = $id";
+        $conexion->query($query);
+
+        $resp = $conexion->getFilasAfectadas();
+        $conexion->desconectar();
+        return $resp;
+    }
+
+
+
 }
 ?>

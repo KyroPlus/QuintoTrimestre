@@ -27,7 +27,14 @@ if (isset($_GET['action'])) {
         $controllerReservas->verPaginaInicio('views/html/reservas/reservas.php');
     } else if ($_GET['action'] == "processReservation") {
         $controllerReservas->registerReserva($_POST);
+    } else if ($_GET['action'] == "editarReserva") {
+        $controllerReservas->editarReserva($_GET['id']);
+    } else if ($_GET['action'] == "actualizarReserva") {
+        $controllerReservas->actualizarReserva($_POST);
+    } else if ($_GET['action'] == "eliminarReserva") {
+        $controllerReservas->eliminarReserva($_POST['id']);
     }
+
 
 } else {
 
@@ -36,4 +43,5 @@ if (isset($_GET['action'])) {
     }
     $controllerBase->verPaginaInicio('views/html/home.php');
 }
+
 ?>

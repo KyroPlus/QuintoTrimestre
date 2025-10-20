@@ -74,5 +74,27 @@ class controllerReservas
         $_SESSION['reservas_usuario'] = $reservas;
         return $_SESSION['reservas_usuario'];
     }
+
+    public function editarReserva($id) {
+        $modelo = new Reserva();
+        $reserva = $modelo->obtenerReservaPorId($id);
+        require 'views/html/reservas/editarreservas.php';
+
+    }
+
+    public function actualizarReserva($data) {
+        $modelo = new Reserva();
+        $modelo->actualizarReserva($data);
+        header("Location: index.php");
+        exit();
+    }
+
+    public function eliminarReserva($id) {
+        $modelo = new Reserva();
+        $modelo->eliminarReserva($id);
+        header("Location: index.php");
+        exit();
+    }
+
 }
 ?>
