@@ -96,5 +96,15 @@ class controllerReservas
         exit();
     }
 
+    public function generateReport() {
+        $user_id = $_SESSION['id']; 
+        $reserva = new Reserva();
+        $reservas = $reserva->obtenerReservaPorId($user_id);
+        $postData = [
+            'reservas' => $reservas
+        ];
+
+        require_once 'views/reports/reportBase.php';
+    }
 }
 ?>

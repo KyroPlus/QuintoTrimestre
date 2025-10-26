@@ -53,6 +53,7 @@
                   <th>Solicitud especial</th>
                   <th>Estado</th>
                   <th>Tipo de habitación</th>
+
                 </tr>
               </thead>
               <tbody>
@@ -77,12 +78,20 @@
                             <i class="bi bi-trash"></i> Eliminar
                           </button>
                         </form>
+
+
+
+
                       </div>
                   </td>
+
                   </tr>
                 <?php endforeach; ?>
               </tbody>
             </table>
+            <a href="<?= SITE_URL ?>index.php?action=generateReport" class="btn btn-success btn-lg" target='_blank'>
+               Generar Reporte
+            </a>
           </div>
         <?php else: ?>
           <div class="alert alert-info">Aún no tienes reservas.</div>

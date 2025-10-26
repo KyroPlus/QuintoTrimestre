@@ -6,6 +6,8 @@ require_once 'config/config.php';
 require_once 'models/conexion.php';
 require_once 'models/users.php';
 require_once 'models/reservas.php';
+require_once('lib/fpdf/fpdf.php');
+
 
 $controllerBase = new ControllerBase();
 $controllerReservas = new controllerReservas();
@@ -33,6 +35,8 @@ if (isset($_GET['action'])) {
         $controllerReservas->actualizarReserva($_POST);
     } else if ($_GET['action'] == "eliminarReserva") {
         $controllerReservas->eliminarReserva($_POST['id']);
+    } else if($_GET['action'] == 'generateReport'){
+        $controllerReservas->generateReport();
     }
 
 
